@@ -1,0 +1,46 @@
+{
+  "name": "aurora-debug",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "HOSTNAME=localhost npx tsx watch ./src/index.ts",
+    "build": "prisma generate && tsup",
+    "prisma": "prisma",
+    "test": "vitest run",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@aws-sdk/dsql-signer": "3.896.0",
+    "@hono/node-server": "1.19.4",
+    "@hono/standard-validator": "0.1.5",
+    "@prisma/adapter-pg": "6.16.2",
+    "@prisma/client": "6.16.2",
+    "dayjs": "1.11.18",
+    "effect": "3.17.14",
+    "hono": "4.9.9",
+    "kysely": "0.28.7",
+    "pg": "8.16.3",
+    "prisma-kysely": "2.2.1",
+    "ts-pattern": "5.8.0",
+    "sharp": "0.34.4",
+    "zod": "4.1.11",
+    "zod-prisma-types": "3.2.4"
+  },
+  "devDependencies": {
+    "@hono/swagger-ui": "0.5.2",
+    "@scalar/hono-api-reference": "0.9.19",
+    "@prisma/migrate": "6.16.2",
+    "@testcontainers/postgresql": "11.6.0",
+    "@types/node": "24.5.2",
+    "@types/pg": "8.15.5",
+    "@vercel/ncc": "0.38.4",
+    "execa": "9.6.0",
+    "hono-openapi": "1.0.8",
+    "prisma": "6.16.2",
+    "testcontainers": "11.6.0",
+    "tsup": "8.5.0",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4",
+    "vite-tsconfig-paths": "5.1.4"
+  }
+}

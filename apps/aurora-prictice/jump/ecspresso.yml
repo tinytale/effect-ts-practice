@@ -1,0 +1,8 @@
+cluster: auror-serverless-debug
+region: ap-northeast-1
+service: aurora-debug-jump
+task_definition: ecspresso-jump-task-def.jsonnet
+service_definition: ecspresso-service-def.jsonnet
+
+plugins:
+  - name: cloudformation

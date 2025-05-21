@@ -1,0 +1,8 @@
+cluster: auror-serverless-practice
+region: ap-northeast-1
+service: aurora-test-service-pr-0001
+task_definition: ecspresso-task-def.jsonnet
+service_definition: ecspresso-service-def.jsonnet
+
+plugins:
+  - name: cloudformation

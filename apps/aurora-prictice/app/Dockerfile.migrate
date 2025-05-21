@@ -1,0 +1,10 @@
+FROM node:24-alpine AS core
+WORKDIR /app
+
+RUN npm install -g prisma
+
+COPY ./prisma ./prisma
+
+ENV CONNET_TIMEOUT=60
+
+CMD ["sh", "-c", "env DB_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?schema=app\\&connect_timeout=${CONNET_TIMEOUT:-10} prisma migrate deploy --schema ./prisma/schema.prisma"]

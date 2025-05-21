@@ -1,0 +1,11 @@
+model Role {
+  id String @id @default(uuid(7))
+  name String  /// @zod.string.min(1).max(24)
+
+  createdAt DateTime  @default(now())
+  updateAt DateTime  @updatedAt()
+
+  // relations
+  RolePerrmisson RolePermisson[]  
+  @@map("roles")
+}

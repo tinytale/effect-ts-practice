@@ -1,0 +1,18 @@
+model User {
+  id String @id @default(uuid(7))
+  username String  /// @zod.string.min(1).max(20).regex(/^[a-zA-Z][a-zA-Z0-9+=._-]*$/)
+  password String /// @zod.string.min(1).max(32)
+  createdAt DateTime  @default(now())
+  updateAt DateTime  @updatedAt()
+
+  // relations
+  AccessToken AccessToken[]
+  Blog Blog[]
+
+  @@unique([username])
+  @@index([createdAt])
+  // @@index([name(ops: raw("gin_bigm_ops"))], type: Gin) 
+
+  @@map("users")
+  // @@schema("app")
+}

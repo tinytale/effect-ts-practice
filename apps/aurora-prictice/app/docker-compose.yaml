@@ -1,0 +1,72 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: unless-stopped
+
+  migrate-deploy:
+    build: 
+      context:  .
+      dockerfile: ./Dockerfile.migrate
+    container_name: migrate-deploy
+    environment:
+      DB_URL: postgresql://postgres:postgres@postgres:5432/postgres?schema=public
+      # DB_PORT: 5432
+      # DB_NAME: postgres
+      # DB_HOST: postgres
+      # DB_USER: postgres
+      # DB_PASSWORD: postgres
+    command: ["sh", "-lc", "prisma migrate deploy --schema ./prisma/schema.prisma"]
+    # docker compose run --rm \
+    # migrate-deploy \
+    # sh -lc "prisma migrate dev --create-only --schema=./prisma/schema.prisma"
+    depends_on:
+      - postgres
+    volumes:
+      - ./prisma/migrations:/app/prisma/migrations
+      
+  migrate-create:
+    build: 
+      context:  .
+      dockerfile: ./Dockerfile.migrate
+    container_name: migrate-deploy
+    environment:
+      DB_URL: postgresql://postgres:postgres@postgres:5432/postgres?schema=public
+      # DB_PORT: 5432
+      # DB_NAME: postgres
+      # DB_HOST: postgres
+      # DB_USER: postgres
+      # DB_PASSWORD: postgres
+    command: ["sh", "-lc", "prisma migrate dev --create-only --schema=./prisma/schema.prisma"]
+    depends_on:
+      - migrate-deploy
+    volumes:
+      - ./prisma/migrations:/app/prisma/migrations
+    profiles:
+      - migrate-create
+      
+  app:
+    build: 
+      context:  .
+      dockerfile: ./Dockerfile.app
+    container_name: app
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - migrate-deploy

@@ -1,0 +1,38 @@
+# --------------------------------------------------
+# モノレポ全体から不要な依存や生成物を除外
+# --------------------------------------------------
+
+# 依存パッケージ全般（開発環境は除外）
+node_modules
+**/node_modules
+
+# Git 関連／CI
+.git
+.gitignore
+
+# IDE／エディタ関連
+.vscode/
+.idea/
+
+# ログ・キャッシュ・一時生成物
+*.log
+npm-debug.log
+yarn-error.log
+**/dist/
+**/build/
+**/coverage/
+**/.cache/
+.tmp/
+
+# 環境変数や秘密情報
+.env*
+.npmrc
+**/.env*
+
+# OS固有ファイル
+.DS_Store
+Thumbs.db
+
+# Dockerファイル自身
+Dockerfile*
+.dockerignore

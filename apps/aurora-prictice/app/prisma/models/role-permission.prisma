@@ -1,0 +1,19 @@
+model RolePermisson {
+  id String @id
+  roleId String 
+  permisson String
+
+  createdAt DateTime  @default(now())
+  updateAt DateTime  @updatedAt()
+
+  // relations
+  Role Role @relation(fields: [roleId], references: [id])
+
+  // index
+  @@unique([id,roleId])
+  @@index([createdAt])
+
+  @@map("role_permissions")
+  // @@schema("app")
+} 
+

@@ -1,0 +1,22 @@
+{
+  "name": "aurora-practice",
+  "version": "0.1.0",
+  "bin": {
+    "cdk": "bin/cdk.ts"
+  },
+  "scripts": {
+    "test": "vitest",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.217.0",
+    "constructs": "10.4.2 "
+  },
+  "devDependencies": {
+    "@types/node": "24.5.2",
+    "aws-cdk": "2.1029.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  }
+}

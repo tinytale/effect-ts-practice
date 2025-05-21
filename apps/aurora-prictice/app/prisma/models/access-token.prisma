@@ -1,0 +1,15 @@
+model AccessToken {
+  username String  /// @zod.string.min(1).max(24)
+  accessToken String 
+  expiresAt DateTime
+
+  createdAt DateTime  @default(now())
+  updateAt DateTime  @updatedAt()
+  @@unique([accessToken])
+  @@unique([username])
+
+  // relations
+  User User @relation(fields: [username], references: [username])
+  @@map("access_tokens")
+  // @@schema("app")
+}
